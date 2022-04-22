@@ -2,7 +2,7 @@
 
 **M**arkdown **A**nd **St**yles
 
-Mast is a library for converting markdown text into hiccup-style clojure:
+Mast is a library for converting markdown text into hiccup-style clojure data structures:
 
 ```markdown
 # Title

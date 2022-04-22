@@ -48,6 +48,13 @@
       (-> group-but-last last (string/starts-with? "--"))
       [:h2 (-> group-but-last first)]
 
+      ;; code block
+      (-> group-but-last first (string/starts-with? "```"))
+      [:code (->> group-but-last
+                 rest butlast
+                 (map (fn [line] (if (string/blank? line) "\n" line)))
+                 (string/join ""))]
+
       :else
       (apply vector :div group-but-last))))
 
