@@ -27,7 +27,7 @@
 
 (deftest code-blocks
   (testing "code block conversion (no syntax highlighting)"
-    (is (= (mast/md->clj code-block-example) [:div [:code "(def clj-var 1)"]]))
+    (is (= (mast/md->clj code-block-example) [:div [:code "(def clj-var 1)\n(+ clj-var 5) => 6"]]))
     ))
 
 ;; in mast, groups are 'blocks' of complete markdown e.g a complete unordered list

@@ -58,7 +58,7 @@
       :else
       (apply vector :div group-but-last))))
 
-(defn md->clj [content]
+(defn md->clj [content & opts]
   (let [current-group (atom [])]
     (reduce (fn [coll line]
               ;; debug
