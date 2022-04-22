@@ -1,0 +1,8 @@
+{:deps {org.clojure/clojure {:mvn/version "1.10.3"}}
+ :paths ["src"]
+ :aliases {:dev {:extra-paths ["dev"]}
+           :test {:extra-deps {lambdaisland/kaocha {:mvn/version "1.0.829"}} 
+                  :extra-paths ["test"]}
+           :build {:paths ["src"]
+                   :deps {io.github.clojure/tools.build {:sha "d79ae846b97b5665038b2e90d92b659e5d7bf200"}}
+                   :ns-default build}}}
