@@ -104,8 +104,11 @@
       [:pre (into (with-style :code opts)
                   [(->> group-but-last
                         rest butlast
-                        (map (fn [line] (if (string/blank? line) "\n" line)))
-                        (string/join ""))])]
+                        (map (fn [line] (if (string/blank? line)
+                                          "\n"
+                                          (str line "\n"))))
+                        (string/join "")
+                        string/trim-newline)])]
 
       :else
       (into (with-style :div opts) [(string/join " " group-but-last)]))))
