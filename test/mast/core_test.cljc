@@ -32,7 +32,15 @@
   (testing "code block conversion (no syntax highlighting)"
     (is (= (mast/md->clj code-block-example)
            [:section [:pre [:code "(def clj-var 1)\n\n(+ clj-var 5) => 6\n\n(* clj-var 17) => 17\n(clojure.string/join \" \" [\"one\" \"two\"])"]]]))
-    ))
+    )
+
+  (testing "code block conversion with styles (no syntax highlighting)"
+    (is (= (mast/md->clj code-block-example {:class {:pre :bg-slate-300}})
+           [:section
+            [:pre.bg-slate-300
+             [:code "(def clj-var 1)\n\n(+ clj-var 5) => 6\n\n(* clj-var 17) => 17\n(clojure.string/join \" \" [\"one\" \"two\"])"]]]))
+    )
+  )
 
 (def paragraph-example "this is some text
 that should have a space

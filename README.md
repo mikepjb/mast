@@ -31,8 +31,8 @@ Mast works in both Clojure and Clojurescript.
 
 Include mast as a dependency in your project: 
 ```clojure
-[com.hypalynx/mast "0.1.6"]
-{com.hypalynx/mast {:mvn/version "0.1.6"}}
+[com.hypalynx/mast "0.1.7"]
+{com.hypalynx/mast {:mvn/version "0.1.7"}}
 ```
 
 ```clojure
@@ -55,5 +55,5 @@ Include mast as a dependency in your project:
                       :h3   :text-lg.mb-4
                       :ul   :pl-8.my-8
                       :li   :list-disc
-                      :code :bg-slate-200.inset-shadow.rounded.p-2.text-sm}})]
+                      :pre  :bg-slate-200.inset-shadow.rounded.p-2.text-sm}})]
 ```
