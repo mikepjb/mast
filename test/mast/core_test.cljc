@@ -19,7 +19,7 @@
     (is (= (mast/md->clj "## Header") [:section [:h2 "Header"]]))
     (is (= (mast/md->clj "### Alternative") [:section [:h3 "Alternative"]]))))
 
-    (def code-block-example "```
+(def code-block-example "```
 (def clj-var 1)
 
 (+ clj-var 5) => 6
@@ -28,6 +28,16 @@
 (deftest code-blocks
   (testing "code block conversion (no syntax highlighting)"
     (is (= (mast/md->clj code-block-example) [:section [:code "(def clj-var 1)\n(+ clj-var 5) => 6"]]))
+    ))
+
+(def paragraph-example "this is some text
+that should have a space
+between \"text that\" and \"space between\"")
+
+(deftest paragraphs
+  (testing "multi-line paragraphs"
+    (is (= (mast/md->clj paragraph-example)
+           [:section [:div "this is some text that should have a space between \"text that\" and \"space between\""]]))
     ))
 
 (deftest lists
@@ -99,11 +109,19 @@ Secondary Alternative Header
 
 (deftest styling
   (testing "applying style classes to individual tags"
-    (is (= (mast/with-style :div {:div [:text-green-400]})
-           :div.text-green-400))
+    (is (= (mast/with-style :div {:class {:div [:text-green-400]}})
+           [:div.text-green-400]))
 
-    (is (= (mast/with-style :div {:div :italic})
-           :div.italic))
+    (is (= (mast/with-style :div {:class {:div :italic}})
+           [:div.italic]))
+    )
+
+  (testing "applying css styles directly to individual tags"
+    (is (= (mast/with-style :div {:style {:div {:width "40rem"}}})
+           [:div {:style {:width "40rem"}}]))
+
+    (is (= (mast/with-style :div {:class {:div :italic}})
+           [:div.italic]))
     )
 
   (testing "custom styles"
