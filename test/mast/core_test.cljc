@@ -27,7 +27,7 @@
 
 (deftest code-blocks
   (testing "code block conversion (no syntax highlighting)"
-    (is (= (mast/md->clj code-block-example) [:section [:code "(def clj-var 1)\n(+ clj-var 5) => 6"]]))
+    (is (= (mast/md->clj code-block-example) [:section [:pre [:code "(def clj-var 1)\n(+ clj-var 5) => 6"]]]))
     ))
 
 (def paragraph-example "this is some text

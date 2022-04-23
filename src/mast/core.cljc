@@ -101,11 +101,11 @@
 
       ;; code block
       (-> group-but-last first (string/starts-with? "```"))
-      (into (with-style :code opts)
-            [(->> group-but-last
-                  rest butlast
-                  (map (fn [line] (if (string/blank? line) "\n" line)))
-                  (string/join ""))])
+      [:pre (into (with-style :code opts)
+                  [(->> group-but-last
+                        rest butlast
+                        (map (fn [line] (if (string/blank? line) "\n" line)))
+                        (string/join ""))])]
 
       :else
       (into (with-style :div opts) [(string/join " " group-but-last)]))))
