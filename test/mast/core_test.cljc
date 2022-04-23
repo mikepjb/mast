@@ -38,6 +38,14 @@
                       [:li "two"]
                       [:li "three"]]]))
     )
+
+  (testing "styling bulleted lists"
+    (is (= (mast/md->clj "- one\n- two\n- three" {:class {:li :text-blue-300.list.disc}})
+           [:section [:ul
+                      [:li.text-blue-300.list.disc "one"]
+                      [:li.text-blue-300.list.disc "two"]
+                      [:li.text-blue-300.list.disc "three"]]]))
+    )
   
   (testing "indented lists"
     (is (= (mast/md->clj "- one\n- two\n  - two-one\n  - two-two\n- three")

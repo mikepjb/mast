@@ -45,9 +45,10 @@
         count) -1))
 
 (defn convert-list-group
-  [list-group]
+  ([list-group] (convert-list-group list-group {}))
+  ([list-group class-map]
   (let [converted-list (atom '())
-        current-list-group (atom [:ul])
+        current-list-group (atom [(with-style :ul class-map)])
         current-indentation (atom 0)]
     (->> list-group
          reverse
@@ -58,13 +59,13 @@
              (if (zero? (indentation-level list-item))
                (do
                  (swap! converted-list conj
-                        (into [:li (string/replace list-item #".*- " "")]
-                              (when-not (= [:ul] @current-list-group)
+                        (into [(with-style :li class-map) (string/replace list-item #".*- " "")]
+                              (when-not (= 1 (count @current-list-group))
                                 [@current-list-group])))
-                 (reset! current-list-group [:ul]))
+                 (reset! current-list-group [(with-style :ul class-map)]))
                (do
-                 (swap! current-list-group conj [:li (string/replace list-item #".*- " "")]))))))
-    (into [:ul] @converted-list)))
+                 (swap! current-list-group conj [(with-style :li class-map) (string/replace list-item #".*- " "")]))))))
+    (into [(with-style :ul class-map)] @converted-list))))
 
 (defn convert-group
   "Takes a completed markdown group and returns hiccup-style clojure data structures"
@@ -87,7 +88,7 @@
 
       ;; unordered lists
       (-> group-but-last first (string/starts-with? "- "))
-      (convert-list-group group-but-last)
+      (convert-list-group group-but-last class-map)
 
       ;; code block
       (-> group-but-last first (string/starts-with? "```"))
