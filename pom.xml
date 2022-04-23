@@ -4,8 +4,8 @@
   <packaging>jar</packaging>
   <groupId>com.hypalynx</groupId>
   <artifactId>mast</artifactId>
-  <version>0.1.0</version>
-  <name>sail</name>
+  <version>0.1.2</version>
+  <name>mast</name>
   <dependencies>
     <dependency>
       <groupId>org.clojure</groupId>
